@@ -1,0 +1,33 @@
+%load('D:\vignesh\Modified Code\code\2020-01-10\Scene2\Results\NewStresses.mat');
+C = zeros(60516,1)+0.2;
+%C = zeros(60516,1)+2;
+%P1 = zeros(60516,1);
+%Master = readmatrix('D:\vignesh\Modified Code\code\2020-01-10\Scene2\Thresh\Window_Area_1.xlsx');
+% Pmax = nan(60516,1);
+% Pmin =nan(60516,1);
+%load('D:\vignesh\Data_Analysis\Miku Data\to give vignesh\2ug_mL chalcone 3\NewStresses.mat');
+for i = 1:73
+ %Master = readmatrix(['D:\vignesh\Data_Analysis\Miku Data\to give vignesh\0.2ug_mL chalcone 1\Window_Area_',num2str(i),'.xlsx']);
+%   P1 = Stresses{1,i}(:,4);
+%   P2 = Stresses{1,i}(:,5);
+ P = readmatrix(['D:\vignesh\Data_Analysis\Miku Data\tractions_new\0.2u\1\Tractions\Time',num2str(i),'\traction.dat']);
+ P1 = P(:,3);
+ P2 = P(:,4);
+ %M_tab1 = [Master,P1,C];
+ %M_tab2 = [Master,P2];
+ %M_tab1 = [Master,P2,d];
+ Master = readmatrix(['D:\vignesh\Data_Analysis\Miku Data\Phase Images\1)0.2ug\Resized\Thresh\Window_Area_',num2str(i),'.xlsx']);
+ M_Full =[Master,P1,P2,C];
+ %M_tab1 = [Master,C,Pmax];
+ %M_tab2 = [Master,C,Pmin];
+ %path1 = fullfile(['D:\vignesh\Data_Analysis\Miku Data\to give vignesh\0.2ug_mL chalcone 1\Pmax_Stress',num2str(i),'.xlsx']);
+ %path2 = fullfile(['D:\vignesh\Data_Analysis\Miku Data\to give vignesh\0.2ug_mL chalcone 1\Pmin_Stress',num2str(i),'.xlsx']);
+ path3 = fullfile(['D:\vignesh\Data_Analysis\Miku Data\Phase Images\1)0.2ug\Resized\Thresh\Traction Predictions\Tractions',num2str(i),'.xlsx']);
+%  path1 = fullfile(['D:\vignesh\Modified Code\code\2020-01-10\Scene4\Thresh\Predict table\Pmax_Stress',num2str(i),'.xlsx']);
+%  path2 = fullfile(['D:\vignesh\Modified Code\code\2020-01-10\Scene4\Thresh\Predict table\Pmin_Stress',num2str(i),'.xlsx']);
+ %writetable(array2table( M_tab1,'VariableNames',{'Area','Perimeter','Pmax'}),path1);
+ %writetable(array2table( M_tab2,'VariableNames',{'Area','Perimeter','Pmin'}),path2);
+ writetable(array2table(M_Full,'VariableNames',{'Area','Perimeter','TX','TY','Chalcone'}),path3);
+%  writetable(array2table( M_tab1,'VariableNames',{'Area','Perimeter','Chalcone','Pmax'}),path1);
+%  writetable(array2table( M_tab2,'VariableNames',{'Area','Perimeter','Chalcone','Pmin'}),path2);
+end
